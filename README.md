@@ -1,4 +1,4 @@
-# Descric¸ao do Problema: #
+#Problemática: #
 Um determinado hospital atende diariamente um lote de pacientes a partir de exames
 preliminares. Todos os pacientes deste lote comec¸am os exames na mesma hora e, tao˜
 logo terminam, entram numa fila. Acontece que o hospital detectou que os pacientes que
