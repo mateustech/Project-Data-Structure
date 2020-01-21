@@ -1,4 +1,5 @@
-#Problemática: #
+#Problemática: 
+
 Um determinado hospital atende diariamente um lote de pacientes a partir de exames
 preliminares. Todos os pacientes deste lote comec¸am os exames na mesma hora e, tao˜
 logo terminam, entram numa fila. Acontece que o hospital detectou que os pacientes que
@@ -9,6 +10,6 @@ pilha e montada, o hospital gera uma lista simplesmente encadeada na mesma ordem
 pilha (ou seja, o paciente com o maior tempo de exame esta no in ´ ´ıcio da lista). Esta lista
 sera guardada no arquivo do hospital. ´
 
-# Objetivo:
+#Objetivo:
 Escreva um programa que implementa o sistema acima, inclusive a fila, pilha e lista. O
 relatorio contendo a lista d epaciente dever ´ a ser salvo em .txt denominado “relatorio.txt”.
