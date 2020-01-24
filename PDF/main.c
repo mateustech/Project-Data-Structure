@@ -11,13 +11,14 @@
 int main() {
 	setlocale(LC_ALL , "Portuguese");
 	
-	int opcao,opcaoSub,valor, tempoExame;
+	int opcao,opcaoSub,valor, tempoExame, garanteMovi = 0;
 	char nome[50];
 	
 	Fila * f = nova_fila(); //fila.h
 	Pilha* pi = nova_Pilha(); //pilha.h
 	Lista* l = nova_Lista(); //lista.h
 	
+
 	do{
         do{
         	
@@ -28,24 +29,28 @@ int main() {
             printf("\n|   3. PRÓXIMO PACIENTE              |");
             printf("\n|   4. ATENDER FILA HOSPITAL         |");
             printf("\n|   5. IMPRIMIR DADOS                |");//usando com submenu
+            printf("\n|   6. GERAR RELATÓRIO               |");
             printf("\n|   0. SAIR                          |");//default
             printf("\n|                                    |");
             printf("\n ------------------------------------\n >>> ");
             scanf("%d", &opcao);
-        } while(opcao < 0 || opcao > 5);
+        } while(opcao < 0 || opcao > 6);
 		
         switch(opcao){
             case 1:
-            	
-                printf("Informe o nome do Paciente:");
-                scanf("%s",nome);
-                printf("Informe o tempo de exame:");
-                scanf("%d",&tempoExame);
-                Paciente * p = criarPaciente(nome, tempoExame); //Montando struct Paciente
-                f = pushF(f,p); //Adicionando na fila
-                pi = pushP(pi,p); //Adicionando na Pilha
-				l = pushL(l,p);
+            	if(!garanteMovi){
+            		
+	                printf("Informe o nome do Paciente:");
+	                scanf("%s",nome);
+	                printf("Informe o tempo de exame:");
+	                scanf("%d",&tempoExame);
+	                Paciente * p = criarPaciente(nome, tempoExame); //Montando struct Paciente
+	                f = pushF(f,p); //Adicionando na fila
 				
+				}else{
+					printf("\t\tATENÇÃO!\n\tA fila ja foi atendida\n\n");
+				}
+			
 				printf("\n");
                 system("pause");
                 system("color 07");
@@ -81,7 +86,15 @@ int main() {
                	system("cls");
             	break;
             case 4:
-            	
+            	if(!garanteMovi){
+            		pi = move_Fila_Pilha(f,pi);
+               		l = move_Pilha_Lista(pi,l);
+               		garanteMovi++;
+					printf("\n\nFila atendida com sucesso.\nJa pode gerar os relatorios.\n");
+				}else{
+					printf("\t\tATENÇÃO!\n\tA fila ja foi atendida\n\n");
+				}
+               	
                	
                	
                	printf("\n");
@@ -109,15 +122,24 @@ int main() {
 		               	system("cls");
 		               	break;
 		            case 2:
-		            	exibirPilha(pi);
+		            	if(garanteMovi){
+		            		exibirPilha(pi);
+						}else{
+							printf("Você ainda não moveu os dados.\n");
+						}
+		            	
 		               	
 						printf("\n");
 		               	system("pause");
 		               	system("cls");   
 						break;
 					case 3:
+						if(garanteMovi){
+							exibirLista(l);
+						}else{
+							printf("Você ainda não moveu os dados.\n");
+						}
 						
-						exibirLista(l);
 						
 						printf("\n");
 		               	system("pause");
@@ -127,6 +149,16 @@ int main() {
 		            	break;
 				}
             	
+            	break;
+            case 6:
+            	
+            	GerarArquivo(l);
+            	
+            	
+            	
+            	printf("\n");
+                system("pause");
+               	system("cls");
             	break;
         }
 

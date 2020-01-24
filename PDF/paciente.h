@@ -13,4 +13,6 @@ int pacBusca(Paciente* p,char* nome);
 int compara(Paciente* x, Paciente * y);
 
 int menorTempo(Paciente* p,int valor);
+
+void imprimeArquivo(Paciente* p);
 #endif

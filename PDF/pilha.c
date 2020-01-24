@@ -39,3 +39,11 @@ Pilha* pushP(Pilha* p,Paciente* x){
 	p = novo;
 	return p;
 }
+
+Lista* move_Pilha_Lista(Pilha* pi ,Lista* l){
+	while(pilhaVazia(pi)==0){
+		l = pushL(l,pi->p);
+		pi = pi->prox;
+	}
+	return l;
+}

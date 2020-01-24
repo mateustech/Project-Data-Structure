@@ -2,6 +2,7 @@
 #define FILA_H
 
 #include "paciente.h"
+#include "pilha.h"
 
 typedef struct fila Fila;
 
@@ -17,6 +18,7 @@ Fila* pop(Fila* f);
 
 Paciente* buscaPaciente(Fila* fila,char * nome);
 
+Pilha* move_Fila_Pilha(Fila* fila, Pilha* pi);
 
 #endif
 

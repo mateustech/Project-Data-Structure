@@ -1,5 +1,6 @@
 #include "paciente.h"
 #include "fila.h"
+#include "pilha.h"
 
 #define S "Paciente Adicionado Com Sucesso!"
 #define N "Nao foi possivel adicionar o paciente!"
@@ -89,11 +90,11 @@ Paciente* buscarPaciente(Fila *fila, char *nome){
 	return NULL;
 }
 
-
-
-
-
-
-
-
+Pilha* move_Fila_Pilha(Fila* fila, Pilha* pi){
+	while(fila_vazia(fila)==0){
+		pi = pushP(pi,fila->p);	
+		fila = fila->prox;
+	}
+	return pi;
+}
 

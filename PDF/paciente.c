@@ -38,7 +38,7 @@ int pacBusca(Paciente* p,char* nome){
 }
 
 int compara(Paciente* x, Paciente * y){
-	if(x->tempoExame < y->tempoExame){
+	if(x->tempoExame <= y->tempoExame){
 		return 1;
 	}else{
 		return 0;
@@ -53,7 +53,16 @@ int menorTempo(Paciente* p,int valor){
 	}
 }
 
-
+void imprimeArquivo(Paciente* p){
+	FILE* arq = fopen("relatorio.txt","w");
+	if(!arq){
+		puts("Error na abertura do Arquivo.\n");
+		
+	}
+	printf("Foi ");
+	fprintf(arq,"Nome: %s\tTempo de Exame: %d\n",p->nome,p->tempoExame);
+	printf("Passou\n");
+}
 
 
 

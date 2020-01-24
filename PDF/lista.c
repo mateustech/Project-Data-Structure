@@ -43,11 +43,10 @@ Lista* pushL(Lista* u, Paciente * p){
 		
 		temp = temp->prox;
 	}
-	if(compara(temp->p,novo->p)){
+	
 		temp->prox = novo;
 		return u;	
-	}
-		return u;
+	
 	
 }
 
@@ -57,3 +56,26 @@ Lista* displayPrimeiroMenorTempo(Lista* l, int valor){
 	}
 	return l;
 }
+
+void GerarArquivo( Lista* l){
+	while(l!=NULL){
+		imprimeArquivo(l->p);
+		l = l->prox;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
