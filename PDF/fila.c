@@ -26,6 +26,10 @@ int fila_vazia(Fila *f){ /* verifica se a fila esta vazia */
 }
 
 void exibirFila(Fila *fila){
+	if(fila_vazia(fila)){
+		printf("\n\tFila Vazia.\n\n");
+		return;
+	}
 	printf("--------------------------------------\n");
 	printf("              Pacientes\n");
     while(fila_vazia(fila)==0){
@@ -67,8 +71,22 @@ Fila* pop(Fila* f){
  	if(fila_vazia(f))
 	   return NULL;
 	Fila *temp = f -> prox;
+	f = NULL;	//Garantia
 	free(f);
 	return temp;
+}
+
+Fila* mapearNo(Fila*  f){
+	while(fila_vazia(f)==0){
+		f = pop(f);
+		if(f==NULL){
+			return NULL;
+		}
+		f = f->prox;
+	}
+		   
+	return NULL;
+	   
 }
 
 Paciente* buscarPaciente(Fila *fila, char *nome){
@@ -92,7 +110,7 @@ Paciente* buscarPaciente(Fila *fila, char *nome){
 
 Pilha* move_Fila_Pilha(Fila* fila, Pilha* pi){
 	while(fila_vazia(fila)==0){
-		pi = pushP(pi,fila->p);	
+		pi = pushP(pi,fila->p);
 		fila = fila->prox;
 	}
 	return pi;

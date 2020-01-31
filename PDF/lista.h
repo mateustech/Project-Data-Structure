@@ -14,7 +14,7 @@ void exibirLista(Lista* l);
 
 Lista* pushL(Lista* u, Paciente * p);
 
-Lista* displayPrimeiroMenorTempo(Lista * l, int valor);
+void displayPrimeiroMenorTempo(Lista * l, int valor);
 
 void GerarArquivo(Lista* l);
 

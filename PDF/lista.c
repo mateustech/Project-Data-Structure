@@ -50,18 +50,23 @@ Lista* pushL(Lista* u, Paciente * p){
 	
 }
 
-Lista* displayPrimeiroMenorTempo(Lista* l, int valor){
-	while(!menorTempo(l->p,valor)){ // > 
+void displayPrimeiroMenorTempo(Lista* l, int valor){
+	if(menorTempo(l->p,valor)){
 		l = l->prox;
+		return displayPrimeiroMenorTempo(l,valor); 
 	}
-	return l;
+	printf("\nProximo Paciente:\n\n");
+	pacDisplay(l->p);
+	
 }
 
 void GerarArquivo( Lista* l){
+	FILE* arq = fopen("relatorio.txt","w");
 	while(l!=NULL){
-		imprimeArquivo(l->p);
+		imprimeArquivo(arq,l->p);
 		l = l->prox;
 	}
+	fclose(arq);
 }
 
 

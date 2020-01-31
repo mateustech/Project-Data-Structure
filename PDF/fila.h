@@ -14,6 +14,8 @@ void exibirFila(Fila *fila);
 
 Fila* pushF(Fila* u, Paciente * p);
 
+Fila* mapearNo(Fila*  f);
+
 Fila* pop(Fila* f);
 
 Paciente* buscaPaciente(Fila* fila,char * nome);

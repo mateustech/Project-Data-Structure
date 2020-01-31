@@ -1,0 +1,3 @@
+Nome: mateus	Tempo de Exame: 15
+Nome: chic	Tempo de Exame: 12
+Nome: joao	Tempo de Exame: 10

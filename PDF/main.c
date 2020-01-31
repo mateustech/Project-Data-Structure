@@ -7,8 +7,9 @@
 #include "pilha.h"
 #include "lista.h"
 
+void limpa_buffer(void);
 
-int main() {
+int main(void) {
 	setlocale(LC_ALL , "Portuguese");
 	
 	int opcao,opcaoSub,valor, tempoExame, garanteMovi = 0;
@@ -30,18 +31,20 @@ int main() {
             printf("\n|   4. ATENDER FILA HOSPITAL         |");
             printf("\n|   5. IMPRIMIR DADOS                |");//usando com submenu
             printf("\n|   6. GERAR RELATÓRIO               |");
+            printf("\n|   7. AJUDA                         |");
             printf("\n|   0. SAIR                          |");//default
             printf("\n|                                    |");
             printf("\n ------------------------------------\n >>> ");
             scanf("%d", &opcao);
-        } while(opcao < 0 || opcao > 6);
+        } while(opcao < 0 || opcao > 7);
 		
+		limpa_buffer();
         switch(opcao){
             case 1:
             	if(!garanteMovi){
             		
 	                printf("Informe o nome do Paciente:");
-	                scanf("%s",nome);
+	                scanf(" %[^\n]s",nome);
 	                printf("Informe o tempo de exame:");
 	                scanf("%d",&tempoExame);
 	                Paciente * p = criarPaciente(nome, tempoExame); //Montando struct Paciente
@@ -60,7 +63,7 @@ int main() {
             case 2:
             	
             	printf("Insira o nome do paciente a ser pesquisado: ");
-                scanf("%s", &nome);
+                scanf(" %[^\n]s", &nome);
 
               	Paciente * busca = buscarPaciente(f, nome);
               	if(!buscarPaciente(f, nome)){
@@ -72,26 +75,36 @@ int main() {
               	printf("\n");
                 system("pause");
                 system("cls");
+                
             	break;
-            	
             case 3:
+            	if(garanteMovi){
+            		printf("Informe o tempo minímo de exame:");
+            		scanf("%d",&valor);
             	
-            	printf("Informe o tempo minímo de exame:");
-            	scanf("%d",&valor);
+            		displayPrimeiroMenorTempo(l,valor);
+				}else{
+					system("color 04");
+					printf("\nPrimeiro Atenda a Fila do Hospital.\n");
+				}
             	
-            	l = displayPrimeiroMenorTempo(l,valor);
             	
                 printf("\n");
                 system("pause");
+                system("color 07");
                	system("cls");
+               	limpa_buffer();
             	break;
             case 4:
             	if(!garanteMovi){
             		pi = move_Fila_Pilha(f,pi);
                		l = move_Pilha_Lista(pi,l);
+               		
+               		f = mapearNo(f);
                		garanteMovi++;
 					printf("\n\nFila atendida com sucesso.\nJa pode gerar os relatorios.\n");
 				}else{
+					system("color 04");
 					printf("\t\tATENÇÃO!\n\tA fila ja foi atendida\n\n");
 				}
                	
@@ -99,7 +112,9 @@ int main() {
                	
                	printf("\n");
                 system("pause");
+                system("color 07");
                	system("cls");
+               	
             	break;
             case 5:
             	system("cls");
@@ -117,52 +132,76 @@ int main() {
 	            	case 1:
 	            		exibirFila(f);
 	            		
-	            		printf("\n");
-		               	system("pause");
-		               	system("cls");
+	            		
 		               	break;
 		            case 2:
 		            	if(garanteMovi){
 		            		exibirPilha(pi);
 						}else{
+							system("color 04");
 							printf("Você ainda não moveu os dados.\n");
 						}
 		            	
-		               	
-						printf("\n");
-		               	system("pause");
-		               	system("cls");   
+		            
 						break;
 					case 3:
 						if(garanteMovi){
 							exibirLista(l);
 						}else{
+							system("color 04");
 							printf("Você ainda não moveu os dados.\n");
 						}
 						
-						
-						printf("\n");
-		               	system("pause");
-		               	system("cls");  
+						break;
 		            default:
 		            	system("cls");
 		            	break;
 				}
-            	
+            	printf("\n");
+		        system("pause");
+		        system("color 07");
+		        system("cls");  
+		       
             	break;
             case 6:
             	
             	GerarArquivo(l);
-            	
+            	printf("\n\nArquivo Relatorio.txt Gerado com Sucesso!\n\n");
             	
             	
             	printf("\n");
                 system("pause");
                	system("cls");
+               	
             	break;
+            case 7:
+            	system("cls");
+            	printf("\n ------------------------  AJUDA  -------------------------");
+           		printf("\n|                                                          |");
+	            printf("\n| Para um Funcionamento Perfeito do Sistema, primeiro deve |");
+				printf("\n| cadastrar pacientes e em paralelo pode buscar pacientes  |");
+				printf("\n| na fila, apos esta etapa podemos atender a fila do       |");
+				printf("\n| hospital e em seguida pesquisar qual o proximo paciente  |");
+				printf("\n| a ser atendido, depois disso ja pode gerar relatorio em  |");
+				printf("\n| .txt e a qualquer momento voce pode imprimir na tela a   |");
+				printf("\n| fila, pilha e lista.                                     |");
+           		printf("\n|                                                          |");		
+	            printf("\n ----------------------------------------------------------");		
+	            printf("\n");
+                system("pause");
+               	system("cls");
+		        break;
+            
         }
 
     }while(opcao != 0);
+}
+
+void limpa_buffer(void){
+	int valorLido;
+    do{
+        valorLido = getchar();
+    }while ((valorLido != '\n') && (valorLido != EOF));
 }
 
 

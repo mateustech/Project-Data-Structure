@@ -53,15 +53,12 @@ int menorTempo(Paciente* p,int valor){
 	}
 }
 
-void imprimeArquivo(Paciente* p){
-	FILE* arq = fopen("relatorio.txt","w");
+void imprimeArquivo(FILE* arq,Paciente* p){
 	if(!arq){
 		puts("Error na abertura do Arquivo.\n");
-		
 	}
-	printf("Foi ");
 	fprintf(arq,"Nome: %s\tTempo de Exame: %d\n",p->nome,p->tempoExame);
-	printf("Passou\n");
+	
 }
 
 

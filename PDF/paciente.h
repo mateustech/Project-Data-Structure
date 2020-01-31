@@ -2,7 +2,7 @@
 #define PACIENTE_H
 
 typedef struct paciente Paciente;
-
+#include <stdio.h>
 
 Paciente * criarPaciente(char *nome, int tempoExame);
 
@@ -14,5 +14,5 @@ int compara(Paciente* x, Paciente * y);
 
 int menorTempo(Paciente* p,int valor);
 
-void imprimeArquivo(Paciente* p);
+void imprimeArquivo(FILE* arq,Paciente* p);
 #endif
