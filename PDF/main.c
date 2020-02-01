@@ -25,10 +25,10 @@ int main(void) {
         	
             printf("\n ------------------------------------");
             printf("\n|                                    |");
-            printf("\n|   1. CADASTRAR PACIENTE            |");//usando
-            printf("\n|   2. BUSCAR PACIENTE               |");//usando
-            printf("\n|   3. PRÓXIMO PACIENTE              |");
-            printf("\n|   4. ATENDER FILA HOSPITAL         |");
+            printf("\n|   1. CADASTRAR PACIENTE            |");//Inserimos Paciente na Fila
+            printf("\n|   2. BUSCAR PACIENTE               |");//Buscamos Paciente da Fila
+            printf("\n|   3. PRÓXIMO PACIENTE              |");//Recebe um limite de tempo e retorna o proximo paciente com tempo menor que o limite
+            printf("\n|   4. ATENDER FILA HOSPITAL         |");//Pega 
             printf("\n|   5. IMPRIMIR DADOS                |");//usando com submenu
             printf("\n|   6. GERAR RELATÓRIO               |");
             printf("\n|   7. AJUDA                         |");
@@ -66,7 +66,7 @@ int main(void) {
                 scanf(" %[^\n]s", &nome);
 
               	Paciente * busca = buscarPaciente(f, nome);
-              	if(!buscarPaciente(f, nome)){
+              	if(!busca){
                     printf("\nO paciente nao se encontra na fila.\n");
                 }else{
                 	printf("\n       Paciente Encontrado!\n\n");

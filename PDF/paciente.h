@@ -2,6 +2,7 @@
 #define PACIENTE_H
 
 typedef struct paciente Paciente;
+
 #include <stdio.h>
 
 Paciente * criarPaciente(char *nome, int tempoExame);

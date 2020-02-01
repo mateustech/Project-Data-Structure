@@ -10,8 +10,8 @@
 #include <string.h>
 
 typedef struct fila {
-	Paciente * p;
-	struct fila * prox;
+	Paciente* p;
+	struct fila* prox;
 }Fila;
 
 Fila* nova_fila(){
