@@ -6,202 +6,268 @@
 #include "fila.h"
 #include "pilha.h"
 #include "lista.h"
+#include "interacao.h"
+#include "leitura.h"
 
-void limpa_buffer(void);
+//opcoes do menu principal
+#define N_OPCOES '8'
+#define OPCAO1 '1'
+#define OPCAO2 '2'
+#define OPCAO3 '3'
+#define OPCAO4 '4'
+#define OPCAO5 '5'
+#define OPCAO6 '6'
+#define OPCAO7 '7'
+#define OPCAO8 '8'
+
+//opcoes do do submenu de impressao
+#define N_OPCOES_SUBMENU 4
+#define OPCAO1_SUBMENU '1'
+#define OPCAO2_SUBMENU '2'
+#define OPCAO3_SUBMENU '3'
+#define OPCAO4_SUBMENU '4'
 
 int main(void) {
 	setlocale(LC_ALL , "Portuguese");
 	
-	int opcao,opcaoSub,valor, tempoExame, garanteMovi = 0;
-	char nome[50];
+	unsigned char op1, op2;
+	unsigned int saida1=0, saida2;
+	int tempoExame, garanteMovi = 0;
+	char* nome;
 	
-	Fila * f = nova_fila(); //fila.h
-	Pilha* pi = nova_Pilha(); //pilha.h
-	Lista* l = nova_Lista(); //lista.h
+	//criacao das estruturas de dados usadas no programa
+	Fila * fila = novaFila();
+	Pilha* pilha = novaPilha();
+	Lista* lista = novaLista();
 	
-
+	
 	do{
-        do{
-        	
-            printf("\n ------------------------------------");
-            printf("\n|                                    |");
-            printf("\n|   1. CADASTRAR PACIENTE            |");//Inserimos Paciente na Fila
-            printf("\n|   2. BUSCAR PACIENTE               |");//Buscamos Paciente da Fila
-            printf("\n|   3. PRÓXIMO PACIENTE              |");//Recebe um limite de tempo e retorna o proximo paciente com tempo menor que o limite
-            printf("\n|   4. ATENDER FILA HOSPITAL         |");//Pega 
-            printf("\n|   5. IMPRIMIR DADOS                |");//usando com submenu
-            printf("\n|   6. GERAR RELATÓRIO               |");
-            printf("\n|   7. AJUDA                         |");
-            printf("\n|   0. SAIR                          |");//default
-            printf("\n|                                    |");
-            printf("\n ------------------------------------\n >>> ");
-            scanf("%d", &opcao);
-        } while(opcao < 0 || opcao > 7);
-		
-		limpa_buffer();
-        switch(opcao){
-            case 1:
+		mensagemAbertura();
+        menuPrincipal();
+        op1=leOpcao(OPCAO1, OPCAO1+N_OPCOES-1);
+        limpaTela();
+        switch(op1){
+            case OPCAO1:
+            	printf("[CADASTRO DE PACIENTE]\n\n\n");
             	if(!garanteMovi){
-            		
-	                printf("Informe o nome do Paciente:");
-	                scanf(" %[^\n]s",nome);
-	                printf("Informe o tempo de exame:");
-	                scanf("%d",&tempoExame);
-	                Paciente * p = criarPaciente(nome, tempoExame); //Montando struct Paciente
-	                f = pushF(f,p); //Adicionando na fila
+	                nome = leNome();
+	                tempoExame = leTempo();
+	                Paciente * p = criarPaciente(nome, tempoExame);
+	                
+	                Paciente* p_aux = ultimoPacienteDaFila(fila);
+	                
+	                if(filaVazia(fila)){
+	                	fila = pushFila(fila,p);
+	                	system("color 02");
+	                	printf("\nPaciente adicionado com sucesso.\n\n\n");
+					}
+					else if(compara(p_aux, p)){
+						fila = pushFila(fila,p);
+						system("color 02");
+						printf("\nPaciente adicionado com sucesso.\n\n\n");
+					}
+					else{
+						liberaPaciente(p);
+						system("color 04");
+						printf("\n\tATENÇÃO!\n");
+						printf("Tempo de exame menor do que o último inserido.\n");
+						printf("Não é possível adicionar o paciente.\n\n\n");
+					}
+				}else{
+					system("color 04");
+					printf("\tATENÇÃO!\n");
+					printf("A fila já foi atendida.\n");
+					printf("Cadastro de pacientes inativo.\n\n\n");
+				}
 				
-				}else{
-					printf("\t\tATENÇÃO!\n\tA fila ja foi atendida\n\n");
-				}
-			
-				printf("\n");
-                system("pause");
+				system("pause");
                 system("color 07");
-                system("cls");
-            	
+				limpaTela();
 				break;
-            case 2:
-            	
-            	printf("Insira o nome do paciente a ser pesquisado: ");
-                scanf(" %[^\n]s", &nome);
-
-              	Paciente * busca = buscarPaciente(f, nome);
-              	if(!busca){
-                    printf("\nO paciente nao se encontra na fila.\n");
-                }else{
-                	printf("\n       Paciente Encontrado!\n\n");
-                	pacDisplay(busca);
-				}
-              	printf("\n");
-                system("pause");
-                system("cls");
-                
-            	break;
-            case 3:
-            	if(garanteMovi){
-            		printf("Informe o tempo minímo de exame:");
-            		scanf("%d",&valor);
-            	
-            		displayPrimeiroMenorTempo(l,valor);
-				}else{
-					system("color 04");
-					printf("\nPrimeiro Atenda a Fila do Hospital.\n");
-				}
-            	
-            	
-                printf("\n");
-                system("pause");
-                system("color 07");
-               	system("cls");
-               	limpa_buffer();
-            	break;
-            case 4:
+            case OPCAO2:
+            	printf("[BUSCA DE PACIENTE]\n\n\n");
             	if(!garanteMovi){
-            		pi = move_Fila_Pilha(f,pi);
-               		l = move_Pilha_Lista(pi,l);
-               		
-               		f = mapearNo(f);
-               		garanteMovi++;
-					printf("\n\nFila atendida com sucesso.\nJa pode gerar os relatorios.\n");
-				}else{
-					system("color 04");
-					printf("\t\tATENÇÃO!\n\tA fila ja foi atendida\n\n");
+            		nome = leNome();
+
+              		Paciente * paciente = buscarPaciente(fila, nome);
+              		if(!paciente){
+                    	printf("\nO paciente nao se encontra na fila.\n\n\n");
+                	}else{
+                		system("color 02");
+						printf("\nPaciente encontrado:\n");
+                		pacDisplay(paciente);
+                		printf("\n\n");
+					}	
 				}
-               	
-               	
-               	
-               	printf("\n");
+				else{
+					system("color 04");
+					printf("\tATENÇÃO!\n");
+					printf("A fila já foi atendida.\n");
+					printf("Busca de paciente inativa.\n\n\n");
+				}
+				
                 system("pause");
                 system("color 07");
-               	system("cls");
-               	
+				limpaTela();
             	break;
-            case 5:
-            	system("cls");
-            	printf("\n -------------------------");
-	            printf("\n|                         |");
-	            printf("\n|   1. FILA               |");
-	            printf("\n|   2. PILHA              |");
-	            printf("\n|   3. LISTA              |");
-	            printf("\n|   0. SAIR               |");
-	            printf("\n|                         |");
-	            printf("\n -------------------------\n >>> ");
-	            scanf("%d", &opcaoSub);
-	            
-	            switch(opcaoSub){
-	            	case 1:
-	            		exibirFila(f);
-	            		
-	            		
-		               	break;
-		            case 2:
-		            	if(garanteMovi){
-		            		exibirPilha(pi);
-						}else{
-							system("color 04");
-							printf("Você ainda não moveu os dados.\n");
-						}
-		            	
-		            
-						break;
-					case 3:
-						if(garanteMovi){
-							exibirLista(l);
-						}else{
-							system("color 04");
-							printf("Você ainda não moveu os dados.\n");
-						}
-						
-						break;
-		            default:
-		            	system("cls");
-		            	break;
+            case OPCAO3:
+            	printf("[BUSCA DE PACIENTE POR TEMPO]\n\n\n");
+            	if(garanteMovi){
+            		tempoExame = leTempo();
+            		
+            		displayPrimeiroMenorTempo(lista, tempoExame);
+				}else{
+					system("color 04");
+					printf("\tATENÇÃO!\n");
+					printf("\nA fila do hospital ainda não foi atendida.\n\n\n");
 				}
-            	printf("\n");
-		        system("pause");
-		        system("color 07");
-		        system("cls");  
-		       
-            	break;
-            case 6:
             	
-            	GerarArquivo(l);
-            	printf("\n\nArquivo Relatorio.txt Gerado com Sucesso!\n\n");
-            	
-            	
-            	printf("\n");
                 system("pause");
-               	system("cls");
-               	
+                system("color 07");
+               	limpaTela();
             	break;
-            case 7:
-            	system("cls");
-            	printf("\n ------------------------  AJUDA  -------------------------");
-           		printf("\n|                                                          |");
-	            printf("\n| Para um Funcionamento Perfeito do Sistema, primeiro deve |");
-				printf("\n| cadastrar pacientes e em paralelo pode buscar pacientes  |");
-				printf("\n| na fila, apos esta etapa podemos atender a fila do       |");
-				printf("\n| hospital e em seguida pesquisar qual o proximo paciente  |");
-				printf("\n| a ser atendido, depois disso ja pode gerar relatorio em  |");
-				printf("\n| .txt e a qualquer momento voce pode imprimir na tela a   |");
-				printf("\n| fila, pilha e lista.                                     |");
-           		printf("\n|                                                          |");		
-	            printf("\n ----------------------------------------------------------");		
-	            printf("\n");
+            case OPCAO4:
+            	printf("[ATENDENDO A FILA DO HOSPITAL]\n\n\n");
+            	if(!garanteMovi){
+            		pilha = moveFilaPraPilha(fila,pilha);
+               		lista = movePilhaPraLista(pilha,lista);
+               		
+               		fila = liberarFila(fila);
+               		garanteMovi = 1;
+               		
+               		system("color 02");
+					printf("\nFila atendida com sucesso.\n");
+					printf("Geração do relatório liberada.\n\n\n");
+				}else{
+					system("color 04");
+					printf("\tATENÇÃO!\n");
+					printf("\nA fila já foi atendida.\n\n");
+				}
+				
                 system("pause");
-               	system("cls");
-		        break;
+                system("color 07");
+               	limpaTela();
+            	break;
+            case OPCAO5:
+            	limpaTela();
+	            saida2 = 0;
+				do{	
+					mensagemAbertura();
+					submenuImpressao();
+					op2=leOpcao(OPCAO1_SUBMENU, OPCAO1_SUBMENU+N_OPCOES_SUBMENU-1);
+					limpaTela();
+	            	switch(op2){
+	            		case OPCAO1_SUBMENU:
+							printf("[EXIBINDO A FILA]\n\n\n");
+							if(filaVazia(fila)){
+								printf("Fila vazia.\n\n\n");
+							}
+							else{
+								exibirFila(fila);	
+							}
+	            			
+	            			system("pause");
+		        			system("color 07");
+		        			limpaTela();
+							break;
+		            	case OPCAO2_SUBMENU:
+		            		printf("[EXIBINDO A PILHA]\n\n\n");
+		            		if(garanteMovi){
+		            			if(pilhaVazia(pilha)){
+		            				printf("Pilha vazia\n\n\n");
+								}
+								else{
+									exibirPilha(pilha);	
+								}
+							}else{
+								system("color 04");
+								printf("\tATENÇÃO!\n");
+								printf("A fila do hospital ainda não foi atendida.\n\n\n");
+							}
+							
+							system("pause");
+		        			system("color 07");
+		        			limpaTela();
+							break;
+						case OPCAO3_SUBMENU:
+							printf("[EXIBINDO A LISTA]\n\n\n");
+							if(garanteMovi){
+								if(listaVazia(lista)){
+									printf("Lista vazia.\n\n\n");								
+								}
+								else{
+									exibirLista(lista);	
+								}
+							}else{
+								system("color 04");
+								printf("\tATENÇÃO!\n");
+								printf("A fila do hospital ainda não foi atendida.\n\n\n");
+							}
+							
+							system("pause");
+		        			system("color 07");
+		        			limpaTela();
+							break;
+		            	case OPCAO4_SUBMENU:
+		            		saida2 = 1;
+		            		mensagemDespedida("Encerrando a impressão. Ate breve...");
+		            		
+							system("pause");
+		        			system("color 07");
+		        			limpaTela();
+		            		break;
+						default:
+		            		printf("Este programa possui um bug\n");
+							return 1;
+					}
+				}while(!saida2);
+            	break;
+            case OPCAO6:
+            	printf("[GERANDO RELATÓRIO]\n\n\n");
+				if(garanteMovi){
+            		gerarArquivo(lista);
+					system("color 02");
+					printf("\nRelatório gerado com sucesso.\n\n\n");
+				}
+				else{
+					system("color 04");
+					printf("\tATENÇÃO!\n");
+					printf("A fila do hospital ainda não foi atendida.\n\n\n");
+				}
             
+                system("pause");
+                system("color 07");
+		        limpaTela();
+            	break;
+            case OPCAO7:
+            	limpaTela();
+            	mensagemAjuda();
+            	
+                system("pause");
+               	limpaTela();
+		        break;
+		    case OPCAO8:
+		    	saida1 = 1;
+		    	mensagemDespedida("Encerrando o programa. Ate breve...");
+		    	break;
+		    default:
+				printf("Este programa possui um bug\n");
+				return 1;
         }
 
-    }while(opcao != 0);
+    }while(!saida1);
+    
+    //liberando a pilha
+	pilha = liberarPilha(pilha);
+    if(pilhaVazia(pilha)){
+    	printf("Pilha liberada\n");
+	}
+	
+	//liberando a lista
+	lista = liberarFila(lista);
+    if(listaVazia(lista)){
+    	printf("Lista liberada\n");
+	}
+	
+    return 0;
 }
-
-void limpa_buffer(void){
-	int valorLido;
-    do{
-        valorLido = getchar();
-    }while ((valorLido != '\n') && (valorLido != EOF));
-}
-
-

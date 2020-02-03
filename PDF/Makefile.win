@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o paciente.o fila.o pilha.o lista.o
-LINKOBJ  = main.o paciente.o fila.o pilha.o lista.o
+OBJ      = main.o paciente.o fila.o pilha.o lista.o interacao.o leitura.o
+LINKOBJ  = main.o paciente.o fila.o pilha.o lista.o interacao.o leitura.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -38,3 +38,9 @@ pilha.o: pilha.c
 
 lista.o: lista.c
 	$(CC) -c lista.c -o lista.o $(CFLAGS)
+
+interacao.o: interacao.c
+	$(CC) -c interacao.c -o interacao.o $(CFLAGS)
+
+leitura.o: leitura.c
+	$(CC) -c leitura.c -o leitura.o $(CFLAGS)

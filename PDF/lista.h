@@ -2,21 +2,15 @@
 #define LISTA_H
 
 #include "paciente.h"
-#include <stdio.h>
 
 typedef struct lista Lista;
 
-Lista* nova_Lista();
-
-int lista_Vazia(Lista* l);
-
-void exibirLista(Lista* l);
-
-Lista* pushL(Lista* u, Paciente * p);
-
-void displayPrimeiroMenorTempo(Lista * l, int valor);
-
-void GerarArquivo(Lista* l);
-
+Lista* novaLista();
+int listaVazia(Lista* lista);
+void exibirLista(Lista* lista);
+Lista* pushLista(Lista* lista, Paciente* p);
+void displayPrimeiroMenorTempo(Lista* lista, int valor);
+void gerarArquivo(Lista* lista);
+Lista* liberarLista(Lista* lista);
 
 #endif

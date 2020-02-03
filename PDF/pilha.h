@@ -6,13 +6,11 @@
 
 typedef struct pilha Pilha;
 
-Pilha* nova_Pilha();
+Pilha* novaPilha();
+int pilhaVazia(Pilha* pilha);
+void exibirPilha(Pilha* pilha);
+Pilha* pushPilha(Pilha* pilha, Paciente* p);
+Lista* movePilhaPraLista(Pilha* pilha, Lista* lista);
+Pilha* liberarPilha(Pilha* pilha);
 
-int pilhaVazia(Pilha* p);
-
-void exibirPilha(Pilha* p);//estudar a necessidade dessa função
-
-Pilha* pushP(Pilha* p,Paciente* x);
-
-Lista* move_Pilha_Lista(Pilha* pi ,Lista* l);
 #endif

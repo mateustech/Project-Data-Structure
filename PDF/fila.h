@@ -6,22 +6,14 @@
 
 typedef struct fila Fila;
 
-Fila* nova_fila();
-
-int fila_vazia(Fila *f);
-
-void exibirFila(Fila *fila);
-
-Fila* pushF(Fila* u, Paciente * p);
-
-Fila* mapearNo(Fila*  f);
-
-Fila* pop(Fila* f);
-
-Paciente* buscaPaciente(Fila* fila,char * nome);
-
-Pilha* move_Fila_Pilha(Fila* fila, Pilha* pi);
+Fila* novaFila();
+int filaVazia(Fila* fila);
+void exibirFila(Fila* fila);
+Paciente* ultimoPacienteDaFila(Fila* fila);
+Fila* pushFila(Fila* fila, Paciente* p);
+Fila* liberarFila(Fila* fila);
+Fila* popFila(Fila* fila);
+Paciente* buscarPaciente(Fila* fila, char* nome);
+Pilha* moveFilaPraPilha(Fila* fila, Pilha* pilha);
 
 #endif
-
-
