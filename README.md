@@ -1,5 +1,5 @@
 
-DOCUMENTO DO PROJETO DO SISTEMA DE APOIO AO ATENDIMENTO HOSPITALAR
+<h2>DOCUMENTO DO PROJETO DO SISTEMA DE APOIO AO ATENDIMENTO HOSPITALAR</h2>
 
 Fabrício da Silva Ribeiro
 Helton Wylammi Costa Pinto
@@ -7,7 +7,7 @@ Júlio César Lima Gama
 Mateus Fernandes Costa
 
 
-Sumário
+<b>Sumário</b>
 1. Introdução	4
 2. Implementação	5
 3. Conclusão	11
