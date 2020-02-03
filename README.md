@@ -10,6 +10,6 @@ pilha e montada, o hospital gera uma lista simplesmente encadeada na mesma ordem
 pilha (ou seja, o paciente com o maior tempo de exame esta no in ´ ´ıcio da lista). Esta lista
 sera guardada no arquivo do hospital. ´
 
-<h2>Objetivo:</h2><br>
+<h2>Objetivos:</h2><br>
 Escreva um programa que implementa o sistema acima, inclusive a fila, pilha e lista. O
 relatorio contendo a lista d epaciente dever ´ a ser salvo em .txt denominado “relatorio.txt”.
