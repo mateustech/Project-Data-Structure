@@ -1,2 +1,2 @@
-Nome: Chico Dantas	Tempo de Exame: 15
-Nome: Mateus Costa	Tempo de Exame: 10
+Nome: chico	Tempo de Exame: 12
+Nome: joao	Tempo de Exame: 10

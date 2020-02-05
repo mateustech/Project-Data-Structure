@@ -63,8 +63,8 @@ void mensagemAjuda(){
 	printf("\n| (2) Busque um paciente por nome:                         |");
 	printf("\n| (3) Pesquise o próximo paciente pelo tempo de exame;     |");
 	printf("\n| (4) Atenda a fila;                                       |");
-	printf("\n| (5) Gere o relatório em um arquivo .txt;                 |");
-    printf("\n| (6) Imprima a lista ou a fila ou a pilha quando desejar. |");
+	printf("\n| (5) Imprima a lista ou a fila ou a pilha quando desejar. |");
+    printf("\n| (6) Gere o relatório em um arquivo .txt; 				 |");
 	printf("\n|                                                          |");		
 	printf("\n ----------------------------------------------------------\n");
 }
