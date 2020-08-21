@@ -41,8 +41,9 @@
 
 Technologies used in the development of the project:
 
-- [c](https://www.guj.com.br/t/documentacao-oficial-linguagem-c/352661)
+- [C](https://www.guj.com.br/t/documentacao-oficial-linguagem-c/352661)
 - [Github](https://github.com)
+- Estruturas de Dados - (Filas, Pilhas e Listas)
 
 ## 💻 Projeto
 
