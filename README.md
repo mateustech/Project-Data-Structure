@@ -6,15 +6,15 @@
 <h2 align="center">SISTEMA DE APOIO AO ATENDIMENTO HOSPITALAR.</h2>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rlocatelli9/template-README">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/mateustech/Project_C">
   <!-- trocar: 'rlocatelli9/template-README' pelo caminho do seu respositório -->
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rlocatelli9/template-README">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/mateustech/Project_C">
   <!-- trocar: 'rlocatelli9/template-README' pelo caminho do seu respositório -->
 
-  <a href="https://github.com/rlocatelli9/template-README/commits/master">
+  <a href="https://github.com/mateustech/Project_C/commits/master">
   <!-- trocar: 'rlocatelli9/template-README' pelo caminho do seu respositório -->
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/rlocatelli9/template-README">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/mateustech/Project_C">
      <!-- trocar: 'rlocatelli9/template-README' pelo caminho do seu respositório -->
   </a>
 
